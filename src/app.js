@@ -6,13 +6,14 @@ app.use("/admin", adminAuth)
 const connectDatabase = require("./config/database")
 const userModel = require("./models/user")
 
+app.use(express.json())
 app.post("/signup", async (req, res) => {
     const userData = {
-        firstName: "Vindresh",
-        lastName: "Singh",
-        password: "12345678",
-        email: "vindresh@gmail.com",
-        age: 20,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        password: req.body.password,
+        email: req.body.email,
+        age: req.body.age,
     }
     const user = new userModel(userData)
     await user.save()
